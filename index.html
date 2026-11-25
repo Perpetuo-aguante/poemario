@@ -1,0 +1,668 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Poemario Perpetuo</title>
+<meta name="description" content="Preventa del poemario de Perpetuo: 60 poetas de la lengua española. El libro se imprime si llegamos a 500 ejemplares.">
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Lora:ital,wght@0,400;0,600;1,400;1,600&display=swap">
+<style>
+:root{
+  --azul:#074990;
+  --coral:#E2543B;
+  --lima:#C3D73A;
+  --tinta:#0D1114;
+  --papel:#FAF6F1;
+
+  --bg:var(--papel);
+  --fg:var(--tinta);
+  --muted:#6b6e73;
+  --muted2:#9a9d a2;
+  --line:#e2dbd1;
+  --surface:#fff;
+  --accent:var(--azul);
+  --bar-track:#e2dbd1;
+  --logo-negro:block;--logo-blanco:none;
+  --char-halo:transparent;
+
+  --f-display:"Poppins",system-ui,sans-serif;
+  --f-body:"Lora",Georgia,"Times New Roman",serif;
+  --f-ui:"Poppins",system-ui,sans-serif;
+
+  --step--2:clamp(.72rem,.7rem + .1vw,.78rem);
+  --step--1:clamp(.82rem,.78rem + .2vw,.92rem);
+  --step-0:clamp(1rem,.96rem + .2vw,1.1rem);
+  --step-1:clamp(1.18rem,1.06rem + .6vw,1.5rem);
+  --step-2:clamp(1.4rem,1.16rem + 1.2vw,2.1rem);
+  --step-3:clamp(1.9rem,1.4rem + 2.5vw,3.4rem);
+  --step-4:clamp(2.6rem,1.8rem + 4vw,5rem);
+  --wrap:1080px;
+}
+@media(prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:var(--tinta);--fg:#f1ece4;--muted:#a8a49d;--muted2:#6b6760;--line:#262b30;--surface:#161b1f;
+    --accent:#6fa8e8;--bar-track:#262b30;
+    --logo-negro:none;--logo-blanco:block;--char-halo:rgba(250,246,241,.85);color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:var(--tinta);--fg:#f1ece4;--muted:#a8a49d;--muted2:#6b6760;--line:#262b30;--surface:#161b1f;
+  --accent:#6fa8e8;--bar-track:#262b30;
+  --logo-negro:none;--logo-blanco:block;--char-halo:rgba(250,246,241,.85);color-scheme:dark;
+}
+
+*{box-sizing:border-box;margin:0}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:var(--step-0);line-height:1.6;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.wrap{max-width:var(--wrap);margin-inline:auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.full{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--f-display);font-weight:800;line-height:1.05;letter-spacing:-.03em;text-wrap:balance}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--coral);outline-offset:3px;border-radius:4px}
+.num{font-variant-numeric:tabular-nums}
+
+/* ── Header ── */
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:14px}
+.logo{height:24px;width:auto}
+.logo.negro{display:var(--logo-negro)}.logo.blanco{display:var(--logo-blanco)}
+.btn{font-family:var(--f-ui);font-weight:700;font-size:var(--step--1);display:inline-flex;align-items:center;gap:.5em;border:0;cursor:pointer;text-decoration:none;border-radius:999px;padding:.7em 1.4em;background:var(--coral);color:#fff;transition:transform .12s,box-shadow .12s;box-shadow:0 2px 0 color-mix(in srgb,var(--coral) 60%,black)}
+.btn:hover{transform:translateY(-1px);box-shadow:0 4px 0 color-mix(in srgb,var(--coral) 60%,black)}
+.btn:active{transform:translateY(1px);box-shadow:none}
+.btn[disabled]{opacity:.45;cursor:not-allowed;transform:none}
+.btn.lg{font-size:var(--step-0);padding:.85em 2em}
+.btn.ghost{background:transparent;color:var(--fg);box-shadow:none;border:2px solid var(--fg)}
+.btn.ghost:hover{background:var(--fg);color:var(--bg)}
+.eyebrow{font-family:var(--f-ui);font-size:var(--step--2);font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+
+/* ── Hero ── */
+.hero{padding-block:clamp(48px,8vw,120px) clamp(32px,5vw,64px)}
+.hero .wrap{display:grid;gap:clamp(20px,3vw,32px);max-width:800px}
+.hero h1{font-size:var(--step-4);line-height:.98}
+.hero h1 .hl{color:var(--coral)}
+.hero-sub{font-size:var(--step-1);max-width:48ch;color:var(--fg);line-height:1.5}
+.hero-sub b{font-family:var(--f-ui);font-weight:700}
+.hero-cta{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.hero-price{font-family:var(--f-ui);font-size:var(--step--1);color:var(--muted)}
+
+/* ── Progress strip ── */
+.strip{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding-block:clamp(24px,3.5vw,36px)}
+.strip .wrap{display:grid;gap:18px}
+.strip-row{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;font-family:var(--f-ui)}
+.strip-count{font-weight:700;font-size:var(--step-1)}
+.strip-clock{display:flex;gap:8px;align-items:stretch;justify-content:center}
+.strip-clock div{background:var(--surface);border:2px solid var(--fg);border-radius:12px;padding:10px 16px;text-align:center;min-width:64px}
+.strip-clock b{display:block;font-family:var(--f-display);font-weight:800;font-size:var(--step-2);line-height:1.1}
+.strip-clock span{font-family:var(--f-ui);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+
+.track{position:relative;height:28px;border-radius:999px;background:var(--bar-track);border:2px solid var(--fg);margin-top:52px}
+.fill{position:absolute;inset:0 auto 0 0;width:0;background:var(--azul);border-radius:999px;transition:width 1.4s cubic-bezier(.2,.8,.2,1)}
+.fill::after{content:"";position:absolute;inset:0;border-radius:inherit;background:repeating-linear-gradient(-45deg,transparent 0 7px,rgba(255,255,255,.12) 7px 12px)}
+.walker{position:absolute;bottom:100%;left:0;width:48px;transform:translateX(-50%);margin-bottom:-2px;transition:left 1.6s cubic-bezier(.3,.6,.3,1);cursor:pointer;-webkit-tap-highlight-color:transparent}
+.walker svg{display:block;width:100%;height:auto;overflow:visible;filter:drop-shadow(0 0 1px var(--char-halo)) drop-shadow(0 0 1px var(--char-halo))}
+.walker .tinta{fill:var(--tinta)}.walker .trazo{fill:none;stroke:var(--tinta);stroke-width:4.5;stroke-linecap:round}
+.walker .ojo{fill:var(--papel)}
+.walker .leg,.walker .arm,.walker .cuerpo,.walker .ojos,.walker .pupilas{transform-box:view-box}
+.walker .leg-f{transform-origin:68px 84px}.walker .leg-b{transform-origin:50px 84px}
+.walker .arm-f{transform-origin:95px 60px}.walker .arm-b{transform-origin:25px 60px}
+.walker .cuerpo{transform-origin:60px 110px}
+.walker .ojos{transform-origin:77px 46px}
+.walker.camina{animation:entra 1.6s cubic-bezier(.3,.6,.3,1) both}
+.walker.camina .leg-f{animation:pierna .42s ease-in-out infinite alternate}
+.walker.camina .leg-b{animation:pierna .42s ease-in-out infinite alternate-reverse}
+.walker.camina .arm-f{animation:brazo .42s ease-in-out infinite alternate-reverse}
+.walker.camina .arm-b{animation:brazo .42s ease-in-out infinite alternate}
+.walker.camina .cuerpo{animation:rebote .21s ease-in-out infinite alternate}
+@keyframes entra{from{translate:-40px 0}to{translate:0 0}}
+@keyframes pierna{from{rotate:-22deg}to{rotate:18deg}}
+@keyframes brazo{from{rotate:-34deg}to{rotate:30deg}}
+@keyframes rebote{from{translate:0 0;scale:1 1}to{translate:0 -2px;scale:.98 1.02}}
+.walker.quieto .cuerpo{animation:respira 3.2s ease-in-out infinite}
+.walker.quieto .ojos{animation:parpadeo 4.6s infinite}
+.walker.quieto .pupilas{animation:mira 7s ease-in-out infinite}
+.walker.quieto .arm-f{animation:balanceo 3.2s ease-in-out infinite}
+.walker.quieto .arm-b{animation:balanceo 3.2s ease-in-out infinite reverse}
+@keyframes respira{0%,100%{scale:1 1}50%{scale:1.02 .98}}
+@keyframes parpadeo{0%,46%,50%,100%{scale:1 1}48%{scale:1 .1}}
+@keyframes mira{0%,30%{translate:0 0}36%,52%{translate:-6px 1px}58%,100%{translate:0 0}}
+@keyframes balanceo{0%,100%{rotate:0deg}50%{rotate:6deg}}
+.walker.saluda .arm-f{animation:saludo .32s ease-in-out 4 alternate}
+@keyframes saludo{from{rotate:-150deg}to{rotate:-105deg}}
+.goal-flag{position:absolute;right:-2px;bottom:calc(100% + 2px);font-family:var(--f-ui);font-size:11px;font-weight:700;background:var(--lima);color:var(--tinta);border:2px solid var(--fg);padding:1px 7px;border-radius:5px;white-space:nowrap}
+.strip-sub{font-size:var(--step-0);max-width:60ch;line-height:1.55}
+.strip-sub b{font-family:var(--f-ui);font-weight:700}
+.strip-note{font-family:var(--f-ui);font-size:var(--step--2);color:var(--muted);display:flex;align-items:center;gap:6px;margin-top:2px}
+.strip-note::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--lima);border:1.5px solid var(--fg);flex:none}
+
+/* ── Sections ── */
+section{padding-block:clamp(56px,8vw,100px)}
+section+section{border-top:1px solid var(--line)}
+
+/* ── $100 / poema ── */
+.centodolares{background:var(--azul);color:#fff;border-top:0}
+.centodolares .wrap{display:grid;grid-template-columns:auto minmax(0,1fr);gap:clamp(28px,5vw,64px);align-items:center}
+.cien-badge{font-family:var(--f-display);font-weight:800;font-size:var(--step-4);line-height:1;white-space:nowrap;text-align:center;min-width:3.5ch}
+.cien-badge small{display:block;font-size:.32em;font-weight:600;opacity:.7;letter-spacing:.05em;margin-top:4px}
+.cien-badge .cien-num{display:inline-block;font-variant-numeric:tabular-nums}
+.cien-copy{display:grid;gap:14px;max-width:50ch}
+.cien-copy h2{font-size:var(--step-2);color:#fff}
+.cien-copy p{opacity:.88;line-height:1.6}
+.cien-copy strong{font-family:var(--f-ui);font-weight:700}
+
+/* ── El libro ── */
+.libro{overflow:hidden}
+.libro .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(32px,5vw,72px);align-items:center}
+.libro-txt{display:grid;gap:18px}
+.libro-txt h2{font-size:var(--step-3)}
+.libro-txt p{max-width:48ch;line-height:1.65;color:var(--fg)}
+.specs{display:flex;gap:0;border:2px solid var(--fg);border-radius:12px;overflow:hidden;margin-top:8px}
+.specs div{flex:1;padding:12px 14px;border-right:1px solid var(--line);min-width:0}
+.specs div:last-child{border-right:0}
+.specs dt{font-family:var(--f-ui);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.specs dd{font-family:var(--f-display);font-weight:600;font-size:var(--step--1);margin:2px 0 0}
+
+/* Book */
+.book-scene{display:flex;justify-content:center;perspective:1000px;padding:20px 0;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.book{position:relative;width:clamp(200px,20vw,260px);aspect-ratio:2/3;transform-style:preserve-3d}
+.book-back{position:absolute;inset:0;background:color-mix(in srgb,var(--azul) 75%,black);border-radius:4px 10px 10px 4px;box-shadow:4px 6px 20px rgba(0,0,0,.18)}
+.book-page{position:absolute;inset:3px 3px 3px 14px;background:var(--papel);border-radius:0 8px 8px 0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:20px;text-align:center;transform-origin:left center;transition:transform .7s cubic-bezier(.4,.15,.2,1);backface-visibility:hidden}
+.book-page .page-label{font-family:var(--f-body);font-style:italic;font-size:clamp(12px,1.5vw,16px);color:#bbb;line-height:1.5}
+.book-page .page-ornament{width:40px;height:1px;background:#ddd}
+.book-page .page-num{position:absolute;bottom:10px;right:14px;font-family:var(--f-ui);font-size:9px;color:#ccc}
+.book-cover{position:absolute;inset:0;background:var(--azul);border-radius:4px 10px 10px 4px;display:grid;align-content:end;padding:clamp(18px,3vw,28px);gap:6px;transform-origin:left center;transition:transform .65s cubic-bezier(.4,.15,.2,1);z-index:2;box-shadow:2px 0 8px rgba(0,0,0,.15)}
+.book-cover::before{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(135deg,rgba(255,255,255,.1) 0%,transparent 50%);pointer-events:none}
+.book-cover .bp{font-family:var(--f-display);font-weight:800;font-size:clamp(9px,1.2vw,12px);letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.65)}
+.book-cover .bt{font-family:var(--f-display);font-weight:800;font-size:clamp(18px,2.5vw,26px);line-height:1.08;color:#fff;letter-spacing:-.02em}
+.book-cover .bs{font-family:var(--f-ui);font-size:clamp(8px,1vw,10px);color:rgba(255,255,255,.55)}
+.book-scene:hover .book-cover,.book-scene.open .book-cover{transform:rotateY(-165deg)}
+.book-page:nth-child(2){z-index:3}.book-page:nth-child(3){z-index:2}.book-page:nth-child(4){z-index:1}
+.book-page:nth-child(2){transition:transform .7s cubic-bezier(.4,.15,.2,1) .05s}
+.book-page:nth-child(3){transition:transform .7s cubic-bezier(.4,.15,.2,1) .12s}
+.book-page:nth-child(4){transition:transform .7s cubic-bezier(.4,.15,.2,1) .19s}
+.book-scene:hover .book-page:nth-child(2),.book-scene.open .book-page:nth-child(2){transform:rotateY(-145deg)}
+.book-scene:hover .book-page:nth-child(3),.book-scene.open .book-page:nth-child(3){transform:rotateY(-125deg)}
+.book-scene:hover .book-page:nth-child(4),.book-scene.open .book-page:nth-child(4){transform:rotateY(-105deg)}
+.book-hint{font-family:var(--f-ui);font-size:var(--step--2);color:var(--muted);text-align:center;margin-top:8px;transition:opacity .4s}
+.book-scene.open+.book-hint,.book-scene:hover+.book-hint{opacity:0}
+
+/* ── Índice ── */
+.indice-section{padding-block:clamp(48px,7vw,80px)}
+.indice-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:clamp(16px,2vw,24px)}
+.indice-head h2{font-size:var(--step-2)}
+.indice-head span{font-family:var(--f-ui);font-size:var(--step--1);color:var(--muted)}
+.slots{display:grid;grid-template-columns:repeat(auto-fill,minmax(36px,1fr));gap:clamp(6px,1vw,10px)}
+.slot{aspect-ratio:1;border-radius:50%;background:var(--fg);position:relative;transition:transform .15s ease;cursor:default}
+.slot::before,.slot::after{content:"";position:absolute;top:34%;width:22%;height:16%;border-radius:50%;background:var(--bg);transition:background .15s}
+.slot::before{left:28%}.slot::after{left:54%}
+.slot.lit{transform:scale(1.12)}
+.slot.c0{background:var(--azul)}
+.slot.c1{background:var(--coral)}
+.slot.c2{background:#8B5CF6}
+.slot.c3{background:var(--lima)}
+.slot.c4{background:#F59E0B}
+.indice-foot{margin-top:clamp(14px,2vw,20px);font-family:var(--f-ui);font-size:var(--step--2);color:var(--muted);display:flex;align-items:center;gap:8px}
+.indice-foot img{height:clamp(60px,10vw,100px);width:auto}
+
+/* ── Cómo funciona ── */
+.como .wrap{max-width:720px}
+.como h2{font-size:var(--step-2);margin-bottom:clamp(24px,3vw,40px)}
+.steps{display:grid;gap:0;counter-reset:step}
+.step{display:grid;grid-template-columns:48px minmax(0,1fr);gap:0 16px;padding-bottom:28px;position:relative}
+.step::before{counter-increment:step;content:counter(step);font-family:var(--f-display);font-weight:800;font-size:var(--step-1);width:48px;height:48px;border-radius:50%;background:var(--fg);color:var(--bg);display:grid;place-items:center;grid-row:1/3}
+.step::after{content:"";position:absolute;left:23px;top:52px;bottom:0;width:2px;background:var(--line)}
+.step:last-child::after{display:none}
+.step:last-child{padding-bottom:0}
+.step h3{font-size:var(--step-1);padding-top:10px}
+.step p{color:var(--muted);font-size:var(--step--1);font-family:var(--f-ui);grid-column:2;margin-top:2px}
+.refund{margin-top:28px;padding:16px 20px;border:2px solid var(--fg);border-radius:12px;font-family:var(--f-ui);font-size:var(--step--1);display:flex;gap:10px;align-items:center;background:var(--surface)}
+.refund::before{content:"";flex:none;width:10px;height:10px;border-radius:50%;background:var(--lima);border:2px solid var(--fg)}
+
+/* ── FAQ ── */
+.faq-section .wrap{max-width:720px}
+.faq-section h2{font-size:var(--step-2);margin-bottom:clamp(20px,3vw,36px)}
+.faq details{border-bottom:2px solid var(--fg)}
+.faq details:first-child{border-top:2px solid var(--fg)}
+.faq summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:16px;align-items:center;padding:16px 0;font-family:var(--f-display);font-weight:600;font-size:var(--step-0)}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-weight:800;font-size:1.3em;line-height:1;color:var(--coral);transition:transform .2s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq details p{padding:0 0 18px;color:var(--muted);max-width:58ch;font-size:var(--step--1)}
+
+/* ── Cierre ── */
+.cierre{background:var(--fg);color:var(--bg);border-top:0;text-align:center}
+.cierre .wrap{display:grid;gap:20px;justify-items:center;max-width:600px}
+.cierre h2{font-size:var(--step-3)}
+.cierre p{font-size:var(--step-0);opacity:.7;max-width:40ch}
+.cierre .btn{background:var(--coral);box-shadow:0 2px 0 rgba(0,0,0,.3)}
+.cierre-ilus{display:flex;gap:16px;justify-content:center}
+.cierre-ilus img{height:clamp(60px,10vw,100px);width:auto;background:var(--bg);border-radius:50%;padding:10px}
+
+footer{padding-block:28px;font-family:var(--f-ui);font-size:var(--step--2);color:var(--muted);border-top:1px solid var(--line)}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center}
+footer .logo{height:16px}
+
+/* ── Modal ── */
+.modal{position:fixed;inset:0;z-index:20;display:grid;place-items:center;padding:max(16px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(16px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));background:rgba(13,17,20,.5)}
+.sheet{background:var(--surface);color:var(--fg);border:2px solid var(--fg);border-radius:16px;width:min(440px,100%);max-height:100%;overflow:auto;padding:24px;display:grid;gap:16px;box-shadow:6px 6px 0 var(--coral)}
+.sheet-head{display:flex;justify-content:space-between;align-items:start;gap:12px}
+.sheet h3{font-family:var(--f-display);font-weight:800;font-size:var(--step-2);line-height:1.1}
+.x{background:none;border:2px solid var(--fg);color:var(--fg);border-radius:50%;width:34px;height:34px;font-size:18px;line-height:1;cursor:pointer;flex:none}
+.field{display:grid;gap:8px;font-family:var(--f-ui)}
+.field>span{font-size:var(--step--2);font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.tiers{display:grid;gap:6px}
+.tiers label{border:2px solid var(--line);border-radius:10px;padding:10px 14px;cursor:pointer;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 12px;align-items:baseline;transition:border-color .1s,box-shadow .1s}
+.tiers input{position:absolute;opacity:0;pointer-events:none}
+.tiers label:has(input:checked){border-color:var(--fg);background:var(--bg);box-shadow:3px 3px 0 var(--azul)}
+.tiers label:has(input:focus-visible){outline:3px solid var(--coral);outline-offset:2px}
+.tiers b{font-family:var(--f-display);font-weight:700}
+.tiers .p{font-family:var(--f-display);font-weight:800;font-variant-numeric:tabular-nums}
+.tiers small{grid-column:1/-1;color:var(--muted);font-size:var(--step--2)}
+.pay-note{font-family:var(--f-ui);font-size:var(--step--2);color:var(--muted)}
+
+/* ── Responsive ── */
+@media(max-width:768px){
+  .libro .wrap,.centodolares .wrap{grid-template-columns:minmax(0,1fr)}
+  .cien-badge{text-align:left}
+  .book-scene{padding:10px 0}
+  .cierre .wrap{text-align:left;justify-items:start}
+  .cierre-ilus{justify-content:flex-start}
+}
+@media(max-width:480px){
+  .specs{flex-direction:column}
+  .specs div{border-right:0;border-bottom:1px solid var(--line)}
+  .specs div:last-child{border-bottom:0}
+  .slots{grid-template-columns:repeat(auto-fill,minmax(30px,1fr))}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a href="#" aria-label="Perpetuo, inicio">
+      <img class="logo negro" src="assets/logo-negro.png" alt="Perpetuo" width="900" height="153">
+      <img class="logo blanco" src="assets/logo-blanco.png" alt="Perpetuo" width="900" height="153">
+    </a>
+    <button class="btn" type="button" data-open-buy>Apartar mi ejemplar</button>
+  </div>
+</header>
+
+<main>
+
+  <!-- Hero: gancho emocional, una sola cosa por viewport -->
+  <section class="hero">
+    <div class="wrap">
+      <h1>Sesenta poetas.<br><span class="hl">Un libro</span> que imprimimos entre todos.</h1>
+      <div class="hero-cta">
+        <button class="btn lg" type="button" data-open-buy>Apartar mi ejemplar</button>
+        <span class="hero-price num">Desde $350 MXN · envío aparte</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Progress strip: información ambiental, no protagonista -->
+  <div class="strip">
+    <div class="wrap">
+      <div class="strip-row">
+        <span class="strip-count num"><span data-vendidos>0</span> <span style="font-weight:400;color:var(--muted);font-size:var(--step--1)">de</span> <span data-meta>500</span> <span style="font-weight:400;color:var(--muted);font-size:var(--step--1)">ejemplares</span></span>
+      </div>
+      <div class="track" role="progressbar" aria-label="Ejemplares vendidos" aria-valuemin="0" aria-valuemax="500" aria-valuenow="0">
+        <div class="fill" data-fill></div>
+        <div class="walker camina" data-walker role="img" aria-label="El punto de Perpetuo camina sobre la barra">
+          <svg viewBox="0 0 120 118" aria-hidden="true">
+            <g class="cuerpo">
+              <g class="arm arm-b"><path class="trazo" d="M25 60 Q12 66 9 80"/><circle class="tinta" cx="9" cy="82" r="6"/></g>
+              <g class="leg leg-b"><path class="trazo" d="M50 84 Q49 94 47 104"/><ellipse class="tinta" cx="44" cy="107" rx="8" ry="4.5"/></g>
+              <g class="leg leg-f"><path class="trazo" d="M68 84 Q69 94 71 104"/><ellipse class="tinta" cx="74" cy="107" rx="8" ry="4.5"/></g>
+              <path class="tinta" d="M59 13 C70 12 79 15 87 21 C95 28 99 38 99 50 C100 63 95 74 86 81 C78 88 69 91 59 90 C47 91 37 87 30 80 C23 73 20 63 21 51 C21 39 25 29 33 22 C40 16 49 13 59 13 Z"/>
+              <g class="ojos">
+                <ellipse class="ojo" cx="70" cy="47" rx="9" ry="6.5" transform="rotate(-6 70 47)"/>
+                <ellipse class="ojo" cx="88" cy="45" rx="8" ry="6.5"/>
+                <g class="pupilas"><circle class="tinta" cx="74" cy="47" r="3.6"/><circle class="tinta" cx="91.5" cy="45.5" r="3.6"/></g>
+              </g>
+              <g class="arm arm-f"><path class="trazo" d="M95 60 Q108 68 111 82"/><circle class="tinta" cx="111" cy="84" r="6"/></g>
+            </g>
+          </svg>
+        </div>
+        <span class="goal-flag">Meta</span>
+      </div>
+      <p class="strip-sub">Cuando lleguemos a 500 ejemplares, lo imprimimos y te lo mandamos a casa.</p>
+      <div class="strip-clock num" role="timer" aria-live="off">
+          <div><b data-d>0</b><span>días</span></div>
+          <div><b data-h>00</b><span>hrs</span></div>
+          <div><b data-m>00</b><span>min</span></div>
+          <div><b data-s>00</b><span>seg</span></div>
+        </div>
+      <p class="strip-note"><span data-faltan>Faltan 500 para imprimir.</span> Si no llegamos, te devolvemos el 100%.</p>
+    </div>
+  </div>
+
+  <!-- $100 por poema -->
+  <section class="centodolares">
+    <div class="wrap">
+      <div class="cien-badge">$<span class="cien-num" data-cien>0</span><small>USD por poema</small></div>
+      <div class="cien-copy">
+        <h2>El poema mejor pagado del español.</h2>
+        <p>Sesenta poetas recibirán <strong>100 dólares por su poema</strong> — 6,000 USD que van directo a los autores. El resto de tu aportación cubre impresión, empaque y envío.</p>
+        <p>Tu compra hace posible que sesenta poetas reciban un pago justo por su trabajo. Esa es la apuesta.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- El libro -->
+  <section class="libro" id="el-libro">
+    <div class="wrap">
+      <div class="libro-txt">
+        <p class="eyebrow">El libro</p>
+        <h2>Sesenta nombres que iremos anunciando.</h2>
+        <p>Poetas con obra publicada y trayectoria reconocida, de distintos países de habla hispana. Iremos publicando poemas en Perpetuo, uno por uno, hasta que el índice esté completo.</p>
+        <dl class="specs">
+          <div><dt>Poetas</dt><dd>60</dd></div>
+          <div><dt>Edición</dt><dd>Numerada</dd></div>
+          <div><dt>Tiraje</dt><dd>500</dd></div>
+          <div><dt>Entrega</dt><dd>2027</dd></div>
+        </dl>
+      </div>
+      <div>
+        <div class="book-scene" data-book>
+          <div class="book">
+            <div class="book-back"></div>
+            <div class="book-page" style="background:#efe9e0">
+              <span class="page-ornament"></span>
+              <span class="page-label">poema<br>por venir</span>
+              <span class="page-ornament"></span>
+              <span class="page-num">117</span>
+            </div>
+            <div class="book-page" style="background:#f3ede4">
+              <span class="page-ornament"></span>
+              <span class="page-label">poema<br>por venir</span>
+              <span class="page-ornament"></span>
+              <span class="page-num">78</span>
+            </div>
+            <div class="book-page" style="background:#f7f1e9">
+              <span class="page-ornament"></span>
+              <span class="page-label">poema<br>por venir</span>
+              <span class="page-ornament"></span>
+              <span class="page-num">45</span>
+            </div>
+            <div class="book-cover">
+              <span class="bp">Perpetuo</span>
+              <strong class="bt">Poesía del hoy</strong>
+              <span class="bs">60 poetas de la lengua española</span>
+            </div>
+          </div>
+        </div>
+        <p class="book-hint">Pasa el cursor para abrir</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Índice -->
+  <section class="indice-section">
+    <div class="full">
+      <div class="wrap">
+        <div class="indice-head">
+          <h2>Índice</h2>
+          <span class="num">0 de 60 revelados</span>
+        </div>
+      </div>
+      <div class="wrap">
+        <div class="slots" data-slots></div>
+        <div class="indice-foot">
+          <span>Cada cara es un poeta. Los iremos revelando.</span>
+          <img src="assets/coma-bote.png" alt="" aria-hidden="true">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cómo funciona -->
+  <section class="como" id="como-funciona">
+    <div class="wrap">
+      <h2>Cómo funciona</h2>
+      <div class="steps">
+        <div class="step">
+          <h3>Apartas tu ejemplar</h3>
+          <p>Eliges tu nivel de aporte y pagas con tarjeta.</p>
+        </div>
+        <div class="step">
+          <h3>Llegamos a 500</h3>
+          <p>Si se alcanza la meta antes del 31 de enero de 2027, el libro entra a imprenta.</p>
+        </div>
+        <div class="step">
+          <h3>Te llega a casa</h3>
+          <p>Entrega estimada a mediados de 2027.</p>
+        </div>
+      </div>
+      <p class="refund">Si no llegamos a la meta, te devolvemos el 100% de tu aportación.</p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq-section" id="preguntas">
+    <div class="wrap">
+      <h2>Preguntas frecuentes</h2>
+      <div class="faq">
+        <details>
+          <summary>¿Cuándo me cobran?</summary>
+          <p>Al momento de apartar tu ejemplar. Si el 31 de enero no llegamos a 500 ejemplares, te reembolsamos el total.</p>
+        </details>
+        <details>
+          <summary>¿Envían fuera de México?</summary>
+          <p>Sí. Envío nacional: $100 MXN. Internacional: $350 MXN. Se agrega al pagar.</p>
+        </details>
+        <details>
+          <summary>¿Cuándo llega el libro?</summary>
+          <p>Calculamos entregar a mediados de 2027. Te avisaremos en cada etapa: cierre de preventa, imprenta y envío.</p>
+        </details>
+        <details>
+          <summary>¿A dónde va mi dinero?</summary>
+          <p>Cada poeta recibe $100 USD por su poema. El resto cubre impresión, empaque y envío.</p>
+        </details>
+        <details>
+          <summary>¿Qué incluye cada nivel?</summary>
+          <p><strong>Lector:</strong> un ejemplar numerado. <strong>Mecenas:</strong> ejemplar numerado + tu nombre en agradecimientos. <strong>Editor honorario:</strong> 3 ejemplares + nombre destacado + gorra y tote bag de Perpetuo.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cierre -->
+  <section class="cierre">
+    <div class="wrap">
+      <div class="cierre-ilus">
+        <img src="assets/bolita-lee.png" alt="">
+        <img src="assets/exclamacion-megafono.png" alt="">
+      </div>
+      <h2>Este libro existe si lo hacemos juntos.</h2>
+      <p>Aparta tu ejemplar y forma parte de la primera edición del poemario de Perpetuo.</p>
+      <button class="btn lg" type="button" data-open-buy>Apartar mi ejemplar</button>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <img class="logo negro" src="assets/logo-negro.png" alt="Perpetuo" width="900" height="153">
+    <img class="logo blanco" src="assets/logo-blanco.png" alt="Perpetuo" width="900" height="153">
+    <span>Revista literaria en español · Ciudad de México</span>
+  </div>
+</footer>
+
+<!-- Modal compra -->
+<div class="modal" data-modal hidden>
+  <form class="sheet" id="compra" role="dialog" aria-modal="true" aria-labelledby="ct">
+    <div class="sheet-head">
+      <h3 id="ct">Apartar mi ejemplar</h3>
+      <button class="x" type="button" data-close aria-label="Cerrar">×</button>
+    </div>
+    <fieldset class="field" style="border:0;padding:0">
+      <span>Nivel de aporte</span>
+      <div class="tiers" data-tiers></div>
+    </fieldset>
+    <p class="pay-note">La cantidad y el envío los eliges en Stripe. Envío MX: $100 · Internacional: $350.</p>
+    <button class="btn lg" type="submit" id="pagar">Ir a pagar</button>
+    <p class="pay-note" data-pay-note>Pago seguro con tarjeta. Si no llegamos a la meta, reembolso total.</p>
+  </form>
+</div>
+
+<script>
+const CONFIG = {
+  meta: 500,
+  vendidos: 0,
+  niveles: [
+    { id: "lector",  nombre: "Lector",           precio: 350,  incluye: "Un ejemplar numerado" },
+    { id: "mecenas", nombre: "Mecenas",          precio: 700,  incluye: "Ejemplar numerado + nombre en agradecimientos" },
+    { id: "editor",  nombre: "Editor honorario", precio: 1050, incluye: "3 ejemplares + nombre destacado + gorra y tote bag de Perpetuo" }
+  ],
+  cierre: "2027-01-31T23:59:59-06:00",
+  stripe: {
+    lector:  "https://buy.stripe.com/6oU8wP4q9e6f8BXc0AcAo03",
+    mecenas: "https://buy.stripe.com/aFa4gzf4Nd2b19vd4EcAo04",
+    editor:  "https://buy.stripe.com/aFa5kD2i13rBbO9ggQcAo05"
+  }
+};
+
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const mxn = n => "$" + n.toLocaleString("es-MX");
+
+/* Progress */
+function pintarProgreso(v) {
+  const pct = Math.min(100, (v / CONFIG.meta) * 100);
+  $$("[data-vendidos]").forEach(e => e.textContent = v.toLocaleString("es-MX"));
+  $$("[data-meta]").forEach(e => e.textContent = CONFIG.meta);
+  const f = Math.max(0, CONFIG.meta - v);
+  $("[data-faltan]").textContent = f > 0 ? `Faltan ${f} para imprimir.` : "¡Meta alcanzada!";
+  const bar = $(".track");
+  bar.setAttribute("aria-valuenow", v);
+  requestAnimationFrame(() => {
+    $("[data-fill]").style.width = pct + "%";
+    $("[data-walker]").style.left = `clamp(24px, ${pct}%, calc(100% - 24px))`;
+  });
+}
+
+/* Countdown */
+const cierre = new Date(CONFIG.cierre).getTime();
+function tic() {
+  let ms = Math.max(0, cierre - Date.now());
+  const d = Math.floor(ms / 864e5); ms -= d * 864e5;
+  const h = Math.floor(ms / 36e5); ms -= h * 36e5;
+  const m = Math.floor(ms / 6e4); ms -= m * 6e4;
+  const s = Math.floor(ms / 1e3);
+  const p = n => String(n).padStart(2, "0");
+  $("[data-d]").textContent = d;
+  $("[data-h]").textContent = p(h);
+  $("[data-m]").textContent = p(m);
+  $("[data-s]").textContent = p(s);
+  if (cierre - Date.now() <= 0) {
+    $$("[data-open-buy]").forEach(b => b.disabled = true);
+  }
+}
+
+/* Slots (index) — JS-driven for fast mouse */
+const slotsBox = $("[data-slots]");
+const COLORS = ["c0","c1","c2","c3","c4"];
+let slotEls = [];
+slotsBox.innerHTML = Array.from({length:60}, () => '<span class="slot"></span>').join("");
+slotEls = $$(".slot", slotsBox);
+
+slotsBox.addEventListener("mouseover", e => {
+  if (!e.target.classList.contains("slot")) return;
+  const el = e.target;
+  const ci = Math.floor(Math.random() * COLORS.length);
+  el.classList.add("lit", COLORS[ci]);
+  clearTimeout(el._t);
+  el._t = setTimeout(() => {
+    el.classList.remove("lit", ...COLORS);
+  }, 600);
+});
+
+/* Tiers */
+$("[data-tiers]").innerHTML = CONFIG.niveles.map((n, i) => `
+  <label><input type="radio" name="nivel" value="${n.id}"${i === 0 ? " checked" : ""}>
+  <b>${n.nombre}</b><span class="p">${mxn(n.precio)}</span><small>${n.incluye}</small></label>`).join("");
+
+/* Modal */
+const modal = $("[data-modal]");
+let lastFocus = null;
+function openBuy(e) { lastFocus = e.currentTarget; modal.hidden = false; }
+function closeBuy() { modal.hidden = true; lastFocus && lastFocus.focus(); }
+$$("[data-open-buy]").forEach(b => b.addEventListener("click", openBuy));
+$("[data-close]").addEventListener("click", closeBuy);
+modal.addEventListener("click", e => { if (e.target === modal) closeBuy(); });
+document.addEventListener("keydown", e => { if (e.key === "Escape" && !modal.hidden) closeBuy(); });
+$("#compra").addEventListener("submit", e => {
+  e.preventDefault();
+  const id = $('input[name="nivel"]:checked').value;
+  const link = CONFIG.stripe[id];
+  if (!link) { $("[data-pay-note]").textContent = "Pagos próximamente."; return; }
+  location.href = link;
+});
+
+/* Walker */
+const walker = $("[data-walker]");
+const idle = () => { walker.classList.remove("camina","saluda"); walker.classList.add("quieto"); };
+setTimeout(idle, 1700);
+function wave() {
+  if (walker.classList.contains("camina")) return;
+  walker.classList.remove("quieto"); walker.classList.add("saluda");
+}
+walker.addEventListener("mouseenter", wave);
+walker.addEventListener("click", wave);
+walker.addEventListener("animationend", e => { if (e.animationName === "saludo") idle(); });
+
+/* Book: open on scroll + click toggle */
+const bookScene = $("[data-book]");
+if (bookScene) {
+  const bookObs = new IntersectionObserver(entries => {
+    entries.forEach(en => {
+      if (en.isIntersecting && en.intersectionRatio > 0.4) {
+        bookScene.classList.add("open");
+        bookObs.unobserve(en.target);
+      }
+    });
+  }, { threshold: [0.4] });
+  bookObs.observe(bookScene);
+  bookScene.addEventListener("click", () => bookScene.classList.toggle("open"));
+}
+
+/* $100 counter animation on scroll */
+const cienEl = $("[data-cien]");
+if (cienEl) {
+  let counted = false;
+  const cienObs = new IntersectionObserver(entries => {
+    entries.forEach(en => {
+      if (en.isIntersecting && !counted) {
+        counted = true;
+        let v = 0;
+        const end = 100;
+        const dur = 1600;
+        const start = performance.now();
+        function tick(now) {
+          const t = Math.min((now - start) / dur, 1);
+          const ease = 1 - Math.pow(1 - t, 3);
+          v = Math.round(ease * end);
+          cienEl.textContent = v;
+          if (t < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+        cienObs.unobserve(en.target);
+      }
+    });
+  }, { threshold: [0.3] });
+  cienObs.observe(cienEl.closest(".centodolares"));
+}
+
+pintarProgreso(CONFIG.vendidos);
+tic();
+setInterval(tic, 1000);
+</script>
+</body>
+</html>
