@@ -2,7 +2,7 @@ name: Actualizar ventas
 
 on:
   schedule:
-    - cron: "*/15 * * * *"   # cada 15 minutos (GitHub a veces se retrasa unos minutos)
+    - cron: "*/5 * * * *"    # cada 5 minutos (el mínimo de GitHub) (GitHub a veces se retrasa unos minutos)
   workflow_dispatch:          # botón para correrlo a mano
 
 permissions:
