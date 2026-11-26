@@ -661,6 +661,11 @@ if (cienEl) {
 }
 
 pintarProgreso(CONFIG.vendidos);
+/* Ventas reales: las escribe la Action "Actualizar ventas" desde Stripe */
+fetch("ventas.json?t=" + Date.now(), { cache: "no-store" })
+  .then(r => r.ok ? r.json() : null)
+  .then(d => { if (d && Number.isFinite(d.vendidos)) pintarProgreso(d.vendidos); })
+  .catch(() => {});
 tic();
 setInterval(tic, 1000);
 </script>
